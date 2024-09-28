@@ -34,7 +34,22 @@ def select_aulani_image():
         "https://github.com/user-attachments/assets/02759d66-a232-4ad3-9180-233b1086105a",
     ]
 
-    return images[int(datetime.now().timestamp()) % len(images)]
+    return images[int(datetime.today().timestamp()) % len(images)]
+
+
+def select_aulani_text():
+    "Select a random message about Disney's Aulani Resort."
+
+    texts = [
+        "be enjoying the sun and sand at Aulani!",
+        "be splashing around in the pools at Aulani!",
+        "be relaxing in the lazy river at Aulani!",
+        "be eating delicious food at Aulani!",
+        "be watching the sunset at Aulani!",
+        "be exploring the island of Oahu!",
+    ]
+
+    return texts[int(datetime.today().timestamp()) % len(texts)]
 
 
 def build_message(to_addr, subject, body_html, body_plain):
@@ -76,33 +91,30 @@ def main(event, context):
     current_date = datetime.now().strftime("%Y-%m-%d")
 
     # calculate the difference between the current date and the target date
-    date_diff = calculate_date_difference(current_date, "2025-09-16")
+    date_diff = calculate_date_difference(current_date, "2025-08-05")
 
     aulani_image = select_aulani_image()
+    aulani_text = select_aulani_text()
 
     # build the message body
     body_html = f"""
     <html>
-        <body style="width: 80%; margin: 0 auto;">
-            <h1 style="text-align: center; width: 100%; margin: 0 auto 0.5rem auto;">
-                Disney Aulani Countdown
-            </h1>
-            <h2 style="text-align: center; margin: 0.5rem 1rem;">
-                {date_diff["days"]} days ({date_diff["weeks"]} weeks) left until September 16, 2025!
-            </h2>
-            <img src="{aulani_image}" alt="Aulani Resort" style="width: 100%; border-radius=18px"/>
-            <br/>
-            <h3 style="margin: 0.5rem 1rem;"> - Jaxon</h3>
+        <body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+            <div style="width: 364px; height: 536px; background: rgba(255, 119, 0, 0.5); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 8px;">
+                <h1 style="width: 364px; height: 29px; margin: 20px auto; font-family: 'Inria Serif'; font-style: normal; font-weight: 500; font-size: 36px; line-height: 44px; text-align: center; color: #000000;">{date_diff['days']} days until Aulani!</h1>
+                <div style="width: 305px; height: 226px; margin: 40px auto; background: url('{aulani_image}'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 12px;"></div>
+                <p style="width: 305px; margin: 20px auto; font-family: 'Inria Serif'; font-style: normal; font-weight: 500; font-size: 24px; line-height: 29px; text-align: center; color: #000000;">In {date_diff['weeks']} weeks we'll {aulani_text}</p>
+                <p style="width: 305px; margin: 20px auto; font-family: 'Inria Serif'; font-style: normal; font-weight: 500; font-size: 24px; line-height: 29px; text-align: center; color: #000000;"> - Jaxon</p>
+                <p style="margin: 20px auto; text-align: center;">Beep boop -- this email was sent automatically.</p>
+            </div>
         </body>
     </html>
     """
 
     body_plain = f"""
-    Countdown to 2025-09-16
+    Countdown to 2025-08-05
 
-    {date_diff["days"]} days ({date_diff["weeks"]} weeks) left until September 16, 2025!
-
-    Don't miss out on the fun!
+    {date_diff["days"]} days ({date_diff["weeks"]} weeks) left until August 5, 2025!
 
     - Jaxon
     """
