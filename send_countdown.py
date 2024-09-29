@@ -41,12 +41,12 @@ def select_aulani_text():
     "Select a random message about Disney's Aulani Resort."
 
     texts = [
-        "be enjoying the sun and sand at Aulani!",
-        "be splashing around in the pools at Aulani!",
-        "be relaxing in the lazy river at Aulani!",
-        "be eating delicious food at Aulani!",
-        "be watching the sunset at Aulani!",
-        "be exploring the island of Oahu!",
+        "enjoying the sun and sand at Aulani",
+        "splashing around in the pools at Aulani",
+        "relaxing in the lazy river at Aulani",
+        "eating delicious food at Aulani",
+        "watching the sunset at Aulani",
+        "exploring the island of Oahu",
     ]
 
     return texts[int(datetime.today().timestamp()) % len(texts)]
@@ -99,15 +99,43 @@ def main(event, context):
     # build the message body
     body_html = f"""
     <html>
-        <body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
-            <div style="width: 364px; height: 536px; background: rgba(255, 119, 0, 0.5); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 8px;">
-                <h1 style="width: 364px; height: 29px; margin: 20px auto; font-family: 'Inria Serif'; font-style: normal; font-weight: 500; font-size: 36px; line-height: 44px; text-align: center; color: #000000;">{date_diff['days']} days until Aulani!</h1>
-                <div style="width: 305px; height: 226px; margin: 40px auto; background: url('{aulani_image}'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 12px;"></div>
-                <p style="width: 305px; margin: 20px auto; font-family: 'Inria Serif'; font-style: normal; font-weight: 500; font-size: 24px; line-height: 29px; text-align: center; color: #000000;">In {date_diff['weeks']} weeks we'll {aulani_text}</p>
-                <p style="width: 305px; margin: 20px auto; font-family: 'Inria Serif'; font-style: normal; font-weight: 500; font-size: 24px; line-height: 29px; text-align: center; color: #000000;"> - Jaxon</p>
-                <p style="margin: 20px auto; text-align: center;">Beep boop -- this email was sent automatically.</p>
-            </div>
-        </body>
+    <body style="margin: 0; padding: 0;">
+
+    <table align="center" width="100%" style="padding: 40px; background-color: #f4f4f4;">
+        <tr>
+            <td align="center">
+                <table width="364" cellspacing="0" cellpadding="0" style="background: rgba(255, 119, 0, 0.5); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 8px; margin-top: 80px;">
+                    <tr>
+                        <td style="padding: 20px;">
+                            <h1 style="margin: 0; font-family: 'Inria Serif', serif; font-weight: 500; font-size: 36px; line-height: 44px; text-align: center; color: #000000;">
+                                {date_diff['days']} days left!
+                            </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding: 40px 0;">
+                            <div style="width: 305px; height: 226px; background: url('{aulani_image}'); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 12px;"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 20px;">
+                            <p style="margin: 0; font-family: 'Inria Serif', serif; font-weight: 500; font-size: 24px; line-height: 29px; text-align: center; color: #000000;">
+                                In {date_diff['weeks']} weeks we'll be {aulani_text}!
+                            </p>
+                            <p style="margin: 0; font-family: 'Inria Serif', serif; font-weight: 500; font-size: 24px; line-height: 29px; text-align: center; color: #000000;">
+                                - Jaxon
+                            </p>
+                            <p style="margin: 20px 0 0 0; text-align: center;">
+                                Beep boop -- this email was sent automatically.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    </body>
     </html>
     """
 
