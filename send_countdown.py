@@ -1,5 +1,6 @@
 import os
 import ssl
+import random
 import smtplib
 from datetime import datetime
 from email.mime.text import MIMEText
@@ -34,7 +35,7 @@ def select_aulani_image():
         "https://github.com/user-attachments/assets/02759d66-a232-4ad3-9180-233b1086105a",
     ]
 
-    return images[int(datetime.today().timestamp()) % len(images)]
+    return random.choice(images)
 
 
 def select_aulani_text():
@@ -49,7 +50,7 @@ def select_aulani_text():
         "exploring the island of Oahu",
     ]
 
-    return texts[int(datetime.today().timestamp()) % len(texts)]
+    return random.choice(texts)
 
 
 def build_message(to_addr, subject, body_html, body_plain):
@@ -126,7 +127,7 @@ def main(event, context):
                                 - Jaxon
                             </p>
                             <p style="margin: 20px 0 0 0; text-align: center;">
-                                Beep boop -- this email was sent automatically.
+                                (Beep boop -- this email was sent automatically.)
                             </p>
                         </td>
                     </tr>
